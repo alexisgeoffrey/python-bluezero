@@ -5,9 +5,9 @@ sudo: required
 # https://docs.travis-ci.com/user/multi-os/
 python:
   - "2.7"
-  - "3.2"
+  - "3.4"
 virtualenv:
-  system_site_packages: true
+  system_site_packages: false
 # matrix:
   # include:
     # - python: 2.7
@@ -26,16 +26,17 @@ before_install:
   - sudo apt-get install -qq python-dbus python3-dbus python-gi python3-gi
   # install dbusmock from github
   - ./install_dbusmock.sh
+  - ./install_dbus.sh
 install:
   # - pip install --upgrade pip
   - pip install pycodestyle
-  - pip install codeclimate-test-reporter
   # Install released version of dbusmock
   # - pip install python-dbusmock
+  - pip install coverage
+  - pip install codeclimate-test-reporter
   # Coverage >4.0 doesn't support Python 3.2
-  # - pip install coverage
-  - if [ "$TRAVIS_PYTHON_VERSION" == "3.2" ]; then travis_retry pip install coverage==3.7.1; fi
-  - if [ "$TRAVIS_PYTHON_VERSION" != "3.2" ]; then travis_retry pip install coverage; fi
+  # - if [ "$TRAVIS_PYTHON_VERSION" == "3.2" ]; then travis_retry pip install coverage==3.7.1; fi
+  # - if [ "$TRAVIS_PYTHON_VERSION" != "3.2" ]; then travis_retry pip install coverage; fi
 before_script:
   # - .travis/setup.sh
   # - echo "Travis Python Version ***********"
