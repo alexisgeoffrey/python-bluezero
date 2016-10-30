@@ -22,11 +22,11 @@ virtualenv:
 #       - python-gi
 #       - python3-gi
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq python-dbus python3-dbus python-gi python3-gi
+  # - sudo apt-get update -qq
+  # - sudo apt-get install -qq python-dbus python3-dbus python-gi python3-gi
   # install dbusmock from github
-  - ./install_dbusmock.sh
-  - ./install_dbus.sh
+  - .travis/install_dbus.sh
+  - .travis/install_dbusmock.sh
 install:
   # - pip install --upgrade pip
   - pip install pycodestyle
@@ -39,11 +39,11 @@ install:
   # - if [ "$TRAVIS_PYTHON_VERSION" != "3.2" ]; then travis_retry pip install coverage; fi
 before_script:
   # - .travis/setup.sh
-  # - echo "Travis Python Version ***********"
-  # - echo $TRAVIS_PYTHON_VERSION
+  - echo "Travis Python Version ***********"
+  - echo $TRAVIS_PYTHON_VERSION
   # - echo $PYTHONPATH
   # If dbusmock installed from github
-  - export PYTHONPATH=$PYTHONPATH:/tmp/python-dbusmock-bluez_gatt
+  # - export PYTHONPATH=$PYTHONPATH:/tmp/python-dbusmock-bluez_gatt
 script:
   - coverage run -m unittest -v tests.test_url_to_hex
   - coverage run -m unittest -v tests.test_adapter
