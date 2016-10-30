@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -ex
 
+pwd
+which python
+find . -name site-packages
+
 if [ "$TRAVIS_PYTHON_VERSION" == "2.7" ]; then
     apt-get download python-dbus
     dpkg -x python-dbus*.deb ./dbus
