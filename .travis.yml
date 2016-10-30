@@ -6,8 +6,8 @@ sudo: required
 python:
   - "2.7"
   - "3.4"
-virtualenv:
-  system_site_packages: false
+# virtualenv:
+  # system_site_packages: true
 # matrix:
   # include:
     # - python: 2.7
