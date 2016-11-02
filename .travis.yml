@@ -46,7 +46,7 @@ before_script:
   # - export PYTHONPATH=$PYTHONPATH:/tmp/python-dbusmock-bluez_gatt
 script:
   - python -m unittest -v tests.test_url_to_hex
-  - python -m unittest -v tests.test_url_to_hex
+  - python -m unittest -v tests.test_adapter
   # - coverage run -m unittest -v tests.test_url_to_hex
   # - coverage run -m unittest -v tests.test_adapter
   # - coverage run -m unittest -v tests.test_device
