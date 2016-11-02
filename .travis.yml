@@ -29,7 +29,7 @@ before_install:
   - .travis/install_dbusmock.sh
 install:
   # - pip install --upgrade pip
-  # - pip install pycodestyle
+  - pip install pycodestyle
   # Install released version of dbusmock
   # - pip install python-dbusmock
   # - pip install coverage
@@ -41,7 +41,7 @@ before_script:
   # - .travis/setup.sh
   # - echo "Travis Python Version ***********"
   # - echo $TRAVIS_PYTHON_VERSION
-  # - echo $PYTHONPATH
+  - echo $PYTHONPATH
   # If dbusmock installed from github
   # - export PYTHONPATH=$PYTHONPATH:/tmp/python-dbusmock-bluez_gatt
 script:
@@ -54,6 +54,6 @@ script:
   - "pycodestyle bluezero"
   - "pycodestyle examples"
   - "pycodestyle tests"
-after_success:
+# after_success:
   # CODECLIMATE_REPO_TOKEN already set in env
   # - codeclimate-test-reporter
