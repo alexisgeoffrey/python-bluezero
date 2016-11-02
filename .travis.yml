@@ -21,12 +21,12 @@ python:
 #       - python3-dbus
 #       - python-gi
 #       - python3-gi
-before_install:
+# before_install:
   # - sudo apt-get update -qq
   # - sudo apt-get install -qq python-dbus python3-dbus python-gi python3-gi
   # install dbusmock from github
-  - .travis/install_dbus.sh
-  - .travis/install_dbusmock.sh
+  # - .travis/install_dbus.sh
+  # - .travis/install_dbusmock.sh
 install:
   # - pip install --upgrade pip
   - pip install pycodestyle
@@ -47,7 +47,7 @@ before_script:
   # - export PYTHONPATH=$PYTHONPATH:/tmp/python-dbusmock-bluez_gatt
 script:
   - python -m unittest -v tests.test_url_to_hex
-  - python -m unittest -v tests.test_adapter
+  # - python -m unittest -v tests.test_adapter
   # - coverage run -m unittest -v tests.test_url_to_hex
   # - coverage run -m unittest -v tests.test_adapter
   # - coverage run -m unittest -v tests.test_device
