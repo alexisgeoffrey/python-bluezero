@@ -10,6 +10,9 @@ if [ "$TRAVIS_PYTHON_VERSION" == "2.7" ]; then
     mv ./dbus/usr/lib/python2.7/dist-packages/* $SITE_PACKAGES/
     mv ./dbus/usr/share $SHARE_DIR/
 
+    echo `ls -la $SITE_PACKAGES`
+    echo `ls -la $SHARE_DIR`
+
     apt-get download python-gi
     dpkg -x python-gi*.deb ./gi
     mv ./gi/usr/lib/python2.7/dist-packages/* $SITE_PACKAGES/

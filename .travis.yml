@@ -41,6 +41,7 @@ before_script:
   # - .travis/setup.sh
   # - echo "Travis Python Version ***********"
   # - echo $TRAVIS_PYTHON_VERSION
+  - echo `which python`
   - echo $PYTHONPATH
   # If dbusmock installed from github
   # - export PYTHONPATH=$PYTHONPATH:/tmp/python-dbusmock-bluez_gatt
