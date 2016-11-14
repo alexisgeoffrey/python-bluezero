@@ -81,7 +81,7 @@ class Application(dbus.service.Object):
 
         for object in self.managed_objs:
             for iface in object.props.keys():
-                response[object.get_path()] = {iface: object.GetAll(iface)}
+                response[object.path] = {iface: object.GetAll(iface)}
 
         return response
 
@@ -325,10 +325,12 @@ class Characteristic(dbus.service.Object):
 
         self.props[constants.GATT_CHRC_IFACE][property_name] = value
 
-        return self.PropertiesChanged(interface_name,
-                                      dbus.Dictionary({property_name: value},
-                                                      signature='sv'),
-                                      dbus.Array([], signature='s'))
+        if self.props[interface_name]['Notifying']:
+            self.PropertiesChanged(interface_name,
+                                   dbus.Dictionary({property_name: value},
+                                                   signature='sv'),
+                                   dbus.Array([], signature='s'))
+
 
     @dbus.service.signal(constants.DBUS_PROP_IFACE,
                          signature='sa{sv}as')
@@ -350,13 +352,13 @@ class Characteristic(dbus.service.Object):
         return self.GetAll(constants.GATT_CHRC_IFACE)['Value']
 
     @dbus.service.method(constants.GATT_CHRC_IFACE,
-                         in_signature='aya{sv}', out_signature='v')
+                         in_signature='aya{sv}', out_signature='')
     def WriteValue(self, value, options):
         """
         DBus method for setting the characteristic value
         :return: value
         """
-        return self.Set(constants.GATT_CHRC_IFACE, 'Value', value)
+        self.Set(constants.GATT_CHRC_IFACE, 'Value', value)
 
     @dbus.service.method(constants.GATT_CHRC_IFACE,
                          in_signature='', out_signature='')

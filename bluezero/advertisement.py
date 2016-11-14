@@ -250,7 +250,7 @@ class AdvertisingManager:
         :return:
         """
         self.advert_mngr_methods.RegisterAdvertisement(
-            advertisement.path,
+            advertisement.get_path(),
             options,
             reply_handler=register_ad_cb,
             error_handler=register_ad_error_cb

@@ -32,6 +32,8 @@ class board:
             self.led.on()
             self.ble.light.Set(constants.GATT_CHRC_IFACE, 'Value', [0x01])
 
+        return 1
+
 
 class ble:
     def __init__(self):
@@ -52,6 +54,7 @@ class ble:
                                                ['read', 'write', 'notify'])
 
         self.light.service = self.srv.path
+        self.switch.service = self.srv.path
         self.app.add_managed_object(self.srv)
         self.app.add_managed_object(self.light)
         self.app.add_managed_object(self.switch)
@@ -60,12 +63,12 @@ class ble:
         self.srv_mng.register_application(self.app, {})
 
         self.dongle = adapter.Adapter(adapter.list_adapters()[0])
-        advert = advertisement.Advertisement(1, 'peripheral')
-        advert.service_UUIDs = [SERVICE_UUID]
+        self.advert = advertisement.Advertisement(1, 'peripheral')
+        self.advert.service_UUIDs = [SERVICE_UUID]
         if not self.dongle.powered:
             self.dongle.powered = True
         ad_manager = advertisement.AdvertisingManager(self.dongle.path)
-        ad_manager.register_advertisement(advert, {})
+        ad_manager.register_advertisement(self.advert, {})
 
     def add_call_back(self, callback):
         self.switch.PropertiesChanged = callback
@@ -80,5 +83,5 @@ if __name__ == '__main__':
     hat = board(link)
     hat.button.when_pressed = hat.switch_led
     link.switch.add_call_back(hat.switch_led)
-
+    print(link.advert.GetAll(constants.LE_ADVERTISEMENT_IFACE))
     link.start_bt()

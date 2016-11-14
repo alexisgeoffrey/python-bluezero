@@ -1,6 +1,7 @@
 """
 The level 10 file for creating beacons
 """
+import dbus
 from bluezero import tools
 from bluezero import adapter
 from bluezero import constants
@@ -68,7 +69,7 @@ class Beacon:
         if not self.dongle.powered:
             self.dongle.powered = True
         ad_manager = advertisement.AdvertisingManager(self.dongle.path)
-        ad_manager.register_advertisement(self.broadcaster, {})
+        ad_manager.register_advertisement(self.broadcaster, dbus.Dictionary({}, signature='sv'))
 
         try:
             tools.start_mainloop()
